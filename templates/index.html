@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <title>Reminder App</title>
+  <div class="navbar">
+    <a class="active" href="">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</head>
+
+<body onload=loadPage()>
+  <div class="full">
+    <div class="container head">
+      <p>Welcome, please click the button below to start a bid!</p>
+    </div>
+  </div>
+
+  <div class="container cont outer">
+    <div class="container cont inner">
+      <div class="container button">
+	<form id="getTournForm" action="/get_auctions/" method="get">
+	    <button type="submit">Get Auctions</button>
+	</form>
+	<form id="refreshForm" action="/get_auctions/" method="get">
+	    <button type="submit">Refresh</button>
+	</form>
+      </div>
+    </div>
+  </div>
+
+  <button id="bt">Modal</button>
+
+  <div id="myModal" class="modal">
+      <div class="modal-content">
+	<span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+  </div>
+
+  <script>
+    //Use this for settings changes
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById('bt');
+    var span = document.getElementsByClassName('close')[0];
+    
+    btn.onclick = function(){
+      modal.style.display = "block";
+    }
+
+    span.onclick = function(){
+      modal.style.display = "none";
+    }
+    
+  </script>
+
+</body>
+
+</html>
