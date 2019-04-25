@@ -1,0 +1,174 @@
+/* Div CSS */
+
+body{
+  background-color: lightblue;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.navbar{
+  background-color: slategray;
+  color : #000000;
+}
+.navbar-link{
+    color :#000000;
+}
+
+.container.eventLog{
+  border: double;
+  border-width: 1px;
+  max-width: 31%;
+  overflow-x: hidden;
+  float: right;
+  font-size: 11px;
+  margin-right: 7px;
+}
+
+.container.eventLog p{
+  margin:0px;
+}
+
+.container.head{
+  background-color: lightblue;
+  font-size : bold;
+  margin : auto;
+  padding-top : 60px;
+  text-align : center;
+}
+
+.container.cont{
+  max-width:66%;
+}
+
+.container.login{
+  max-width: 32%;
+  /*float: left;*/
+}
+
+.container.cont.outer{
+  border: double;
+  border-width: 1px;
+}
+
+.container.cont.inner{
+  margin-top:15px;
+}
+
+.container.head p{
+  font-size: 25px;
+}
+
+
+.container.button{
+  height: 36px;
+}
+
+#tournId{
+  width: 156%;
+}
+
+#loginButton{
+  float: right;
+  margin: 10px;
+}
+
+#getTournForm{
+  float: left;
+  margin-left: -15px;
+}
+
+#refreshForm{
+  float: right;
+  margin-right: -56%;
+}
+
+hr{
+  border: 0;
+  border-top: 1px solid black;
+  margin-top: 0px;
+  margin-bottom: 7px;
+}
+
+.container #errorCode{
+  background-color:red;
+  font-size:18px;
+  width: 41%;
+}
+
+.full{
+  width:100%;
+  margin : auto;
+}
+
+
+
+#row{
+  background-color: #dddddd;
+}
+
+
+
+.table{
+    max-width : 90%;
+    margin : auto;
+    background-color : white;
+    padding-bottom : 60px;
+}
+
+.table td,
+.table th{
+    border: 1px solid #dddddd;
+    text-align : center;
+}
+
+
+
+.refresh{
+    padding-top : 100px;
+}
+
+#btn-update{
+    display : inline-block;
+    padding-left : 20px;
+}
+
+
+
+
+
