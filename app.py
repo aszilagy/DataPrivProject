@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, session
 from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
+import pickle
 
 config = cf.ConfigParser()
 config.read('config.ini')
 
-encrypted_dict = config['DEFAULT']['USER_DICT']
-#encrypted_pass = config['DEFAULT']['PASSWORD']
-#encrypted_user = config['DEFAULT']['USER']
+with open('UserDB.pkl', 'rb') as fb:
+    userDB = pickle.load(fb)
+
 port = config['DEFAULT']['PORT']
 host = config['DEFAULT']['HOST']
 tournieId = ""
@@ -18,13 +19,14 @@ app.secret_key = b'(0a$li*&$p]/nap993-1z[1'
 
 @app.route('/', methods=['GET'])
 def login():
+    print(userDB)
     return render_template('login.html')
 
 @app.route('/verify_login/', methods=['GET','POST'])
 def verify_login():
     if 'username' in request.form and 'password' in request.form:
-        en_dic = encrypted_dict.replace("'", "\"")
-        dd = json.loads(en_dic)
+        with open('UserDB.pkl', 'wb') as fw:
+            pickle.dump(userD, fw)
 
         for key, val in dd.items():
             checkUser = sha.verify(request.form['username'], key)
