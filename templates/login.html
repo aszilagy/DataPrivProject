@@ -1,28 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <title></title>
-</head>
-
-<body>
-  <div class='container login'>
-    <p id="errorCode" class = "container">{{ error }}</p>
-    <form action="{{ url_for('verify_login')}}" method="post">
-      <p>Username:</p>
-      <input type="text" name="username" required>
-
-      <p>Password:</p>
-      <input type="password" name="password" required>
-
-      <div id="loginButton">
-        <input type="submit" class="btn btn-primary submitButton" name="Login">
-        </div>
-    </form>
-  </div>
-</body>
+    
+    <head>
+        <meta charset="utf-8">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="../static/MDB/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="../static/MDB/css/mdb.min.css" rel="stylesheet">
+        <link href="../static/MDB/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/login.css">
+        <title>Reminder App</title>
+                
+    </head>
+    
+    <body onload=loadPage()>
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#">Auction Security Project</a>
+                
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse" id="basicExampleNav">
+                    
+                    <!-- Links -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Create account</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Collapsible content -->
+                
+            </nav>
+            <!--/.Navbar-->
+        </header>
+        
+        <main>
+            <div class='container login'>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Error</h4>
+                    <p> You entered a wrong username or password.</p>
+                    <hr>
+                    <p class="mb-0">If you do not have an account, you can create on <a href="#" class="alert-link">here</a>.</p>
+                </div>
+                
+                
+                <div class="starter-template">
+                    <h1>Private auction protocol for online transactions</h1>
+                </div>
+                <div class="connexion" id="connect" >
+                    <div class="input">
+                        <h6>User : </h6><input id="user" type="text" name="username" style="width: 200px; color: white; text-align: center"/><br><br>
+                        <h6>Password : </h6><input id="mdp" type="password" name="password"  style="width: 200px"/><br><br>
+                        <a href="user.html" id="buttonco"><font color="white"/><h6>Connexion</h6></a>
+                    </div>
+                </div><br>
+        
+        
+            <script>
+                $(document).ready(function(){
+                    $("#buttonco").click(function(){
+                       $("#connect").addClass('animated rotateOut');
+                               var self = $(this);
+                               self.toggleClass("active").next().slideToggle(1500, function() {
+                                     window.location.href = self.attr('href'); // go to href after the slide animation completes
+                                    });
+                               return false; // And also make sure you return false from your click handler.
+                               });
+                   });
+                </script>
+          </div>
+        </main>
+    </body>
+    
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../static/MDB/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../static/MDB/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/MDB/js/mdb.min.js"></script>
 
 </html>
