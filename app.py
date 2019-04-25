@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session
 from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
+import hashlib
 
 config = cf.ConfigParser()
 config.read('config.ini')
@@ -26,6 +27,16 @@ def verify_login():
         en_dic = encrypted_dict.replace("'", "\"")
         dd = json.loads(en_dic)
 
+        #if you enter "teto" in the username space it checks
+        text = "teto"
+        valeur = hashlib.sha256(text.encode('utf-8')).hexdigest()
+        if(valeur == request.form['username']):
+            print('It is checked')
+        else :
+            print('error sha256 is different')
+
+        print(request.form['username'], '   ::   ', valeur)
+
         for key, val in dd.items():
             checkUser = sha.verify(request.form['username'], key)
             if checkUser == True:
@@ -40,6 +51,7 @@ def verify_login():
 
     return render_template('login.html')
 
+
 @app.route('/get_auctions/', methods=['GET','POST'])
 def refresh_tourney():
     if 'username' not in session:
@@ -47,6 +59,7 @@ def refresh_tourney():
 
     return render_template('login.html')
     #return render_template('index.html', tourn_id = tournieId, eventList = jData['eventList'], blueTeam = blueTeam, redTeam = redTeam)
+
 
 
 if __name__ == '__main__':

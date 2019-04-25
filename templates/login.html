@@ -118,32 +118,39 @@
                 <div class="connexion" id="connect" >
                     <div class="input">
                         <form id="getTournForm" action="/verify_login/" method="post">
-                            <h6>User : </h6><input id="user" type="text" name="username" /><br><br>
-                            <h6>Password : </h6><input id="mdp" type="password" name="password"  /><br><br>
-                            <input type="submit"  id="buttonco"><font color="white"/><h6>Connexion</h6></input>
+                            <h6>User : </h6><input id="usern" type="text" name="username" /><br><br>
+                            <h6>Password : </h6><input id="mdp" type="password" name="password"/><br><br>
+
+
+                            <input type="submit"  id="buttonco" onclick="encrypt();"><font color="white" /><h6>Connexion</h6></input>
                         </form>
                     </div>
                 </div><br>
-        
-        
-            <script>
-                $(document).ready(function(){
-                    $("#buttonco").click(function(){
-                       $("#connect").addClass('animated rotateOut');
-                               var self = $(this);
-                               self.toggleClass("active").next().slideToggle(1500, function() {
-                                     window.location.href = self.attr('href'); // go to href after the slide animation completes
-                                    });
-                               return false; // And also make sure you return false from your click handler.
-                               });
-                   });
-                </script>
+
           </div>
         </main>
+
+                            <script type="text/javascript" >
+                                function encrypt(){
+                                    var a = document.getElementById("usern");
+                                    var b = document.getElementById("mdp");
+                                     var hash = sha256.create();
+                                     hash.update(a.value);
+                                     hash.hex();
+                                     a.value = hash.hex();
+                                     hash.update(b.value);
+                                     hash.hex();
+                                     b.value = hash.hex();
+                                 }
+                            </script>
+
     </body>
     
     <!-- SCRIPTS -->
     <!-- JQuery -->
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
     <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="../static/MDB/js/popper.min.js"></script>
