@@ -1,8 +1,8 @@
 # Data Privacy Project
 1. Clean up login page
-  * Adding multi-user support (account creation) - incorporate createAccount.py
-  * Change config.ini to read from Dict { user: password }
-  * Add generation of private/public key on LOGIN
+  * Adding multi-user support (account creation) - incorporate createAccount.py (IN PROGRESS)
+  * Change config.ini to read from Dict { userEncrypted: passwordEncrypted } (DONE)
+  * Add generation of private/public key on LOGIN (NEARLY DONE)
 
 2. Create fake auction page (with list of 5 auctions and option to bid on them)
 
