@@ -30,11 +30,11 @@ def createPass(user, pa):
 
     if 'USER_DICT' in userD:
         print("ADDING NEW USER")
-        userD['USER_DICT'][username].append(password, priv, pub)
+        print(userD['USER_DICT'])
+        userD['USER_DICT'].append({username: (password, priv, pub)})
 
     else:
-        
-        userD = {'USER_DICT': {[username: (password, priv, pub)]}}
+        userD = {'USER_DICT': [{username: (password, priv, pub)}]}
         with open('UserDB.pkl', 'wb') as fw:
             pickle.dump(userD, fw)
     print(userD)
