@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, flash
 from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
+from create_account import *
 
 config = cf.ConfigParser()
 config.read('config.ini')
@@ -26,14 +27,19 @@ def verify_login():
         en_dic = encrypted_dict.replace("'", "\"")
         dd = json.loads(en_dic)
 
+
+        print(request.form['username'], request.form['password'])
+
         for key, val in dd.items():
             checkUser = sha.verify(request.form['username'], key)
             if checkUser == True:
+                print('username ckecked')
                 checkPass = sha.verify(request.form['password'], val)
 
                 if checkUser == True and checkPass == True:
+                    print('username & password ckecked')
                     session['username'] = request.form['username']
-                    return render_template('index.html', username=request.form['username'])
+                    return render_template('auction.html', username=request.form['username'])
 
         if checkUser == False or checkPass == False:
             return render_template('login.html',error='Wrong Username/Password')
@@ -45,8 +51,26 @@ def refresh_tourney():
     if 'username' not in session:
         return "You are not logged in <br><a href = '/'></b>" + "click here to log in</b></a>"
 
-    return render_template('index.html')
+    return render_template('auction.html')
     #return render_template('index.html', tourn_id = tournieId, eventList = jData['eventList'], blueTeam = blueTeam, redTeam = redTeam)
+
+
+@app.route('/create_account/', methods=['GET', 'POST'])
+def create_account():
+    if 'username' in request.form and 'password' in request.form:
+        createPass(request.form['username'], request.form['password'])
+        flash('Your account have been create successfully.')
+        return render_template('login.html')
+
+    return render_template('login.html',error='Something went wrong')
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

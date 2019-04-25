@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
     
     <head>
         <meta charset="utf-8">
@@ -35,7 +35,52 @@
                     <!-- Links -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Create account</a>
+
+                         <!-- Form dropdown -->
+                            <button class="btn btn-outline-white waves-effect" id="" type="button" data-toggle="dropdown"
+                                >Create account</button>
+                            <!-- aria-haspopup="true" aria-expanded="false" -->
+                            <div class="dropdown-menu" id="biddropdown" role="menu">
+                                <div class="card" id="bidCard">
+
+                                    <h5 class="card-header info-color white-text text-center py-4">
+                                        <button type="button ml-auto" class="close" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong>Create your account</strong>
+                                    </h5>
+
+                                    <!--Card content-->
+                                    <div class="card-body px-lg-5 pt-0">
+
+                                        <!-- Form -->
+                                        <form  action="/create_account/" method="GET">
+                                            <!-- Public Key -->
+                                            <div class="md-form">
+                                                <input type="tetx" id="username" name="username" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                                    <label for="#">Username</label>
+                                                </input>
+                                            </div>
+
+                                            <!-- Bid Amount -->
+                                            <div class="md-form">
+                                                <input type="password" id="password" name="password" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                                    <label for="#">Password</label>
+                                                 </input>
+                                            </div>
+
+                                            <br>
+                                            <!-- Sign up button -->
+                                            <p><input type = "submit" value = "submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"/></p>
+                                        </form>
+                                        <!-- Form -->
+
+                                    </div>
+
+                                </div>
+                                <!-- Material form register -->
+                            </div>
+                            <!-- Form dropdown -->
                         </li>
                     </ul>
                 </div>
@@ -47,22 +92,36 @@
         
         <main>
             <div class='container login'>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">Error</h4>
-                    <p> You entered a wrong username or password.</p>
-                    <hr>
-                    <p class="mb-0">If you do not have an account, you can create on <a href="#" class="alert-link">here</a>.</p>
-                </div>
-                
+                {% if error %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <h4 class="alert-heading">Error</h4>
+                        <p> You entered a wrong username or password. {{ error }}</p>
+                        <hr>
+                        <p class="mb-0">If you do not have an account, you can create on <a href="#" class="alert-link">here</a>.</p>
+                    </div>
+                {% endif %}
+
+                {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Error</h4>
+                            <p> You entered a wrong username or password. {% for message in messages %} <li>{{ message }}</li> {% endfor %}</p>
+                            <hr>
+                            <p class="mb-0">If you do not have an account, you can create on <a href="#" class="alert-link">here</a>.</p>
+                        </div>
+                   {% endif %}
+                {% endwith %}
                 
                 <div class="starter-template">
                     <h1>Private auction protocol for online transactions</h1>
                 </div>
                 <div class="connexion" id="connect" >
                     <div class="input">
-                        <h6>User : </h6><input id="user" type="text" name="username" style="width: 200px; color: white; text-align: center"/><br><br>
-                        <h6>Password : </h6><input id="mdp" type="password" name="password"  style="width: 200px"/><br><br>
-                        <a href="auction.html" id="buttonco"><font color="white"/><h6>Connexion</h6></a>
+                        <form id="getTournForm" action="/verify_login/" method="post">
+                            <h6>User : </h6><input id="user" type="text" name="username" /><br><br>
+                            <h6>Password : </h6><input id="mdp" type="password" name="password"  /><br><br>
+                            <input type="submit"  id="buttonco"><font color="white"/><h6>Connexion</h6></input>
+                        </form>
                     </div>
                 </div><br>
         
