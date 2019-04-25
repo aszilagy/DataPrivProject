@@ -3,6 +3,7 @@ from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
 import pickle
+import hashlib
 
 config = cf.ConfigParser()
 config.read('config.ini')
@@ -22,6 +23,16 @@ def login():
 def verify_login():
     checkUser, checkPass = False, False
     if 'username' in request.form and 'password' in request.form:
+
+        text = "teto"
+        valeur = hashlib.sha256(text.encode('utf-8')).hexdigest()
+        if(valeur == request.form['username']):
+            print('It is checked')
+        else:
+            print('error sha256 is different')
+
+        print(request.form['username'], '   ::   ', valeur)
+
         with open('UserDB.pkl', 'rb') as fr:
             dd = pickle.load(fr)
 
@@ -40,6 +51,7 @@ def verify_login():
 
     return render_template('login.html')
 
+
 @app.route('/get_auctions/', methods=['GET','POST'])
 def refresh_tourney():
     if 'username' not in session:
@@ -47,6 +59,7 @@ def refresh_tourney():
 
     return render_template('login.html')
     #return render_template('index.html', tourn_id = tournieId, eventList = jData['eventList'], blueTeam = blueTeam, redTeam = redTeam)
+
 
 
 if __name__ == '__main__':
