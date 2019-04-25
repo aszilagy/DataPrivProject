@@ -2,6 +2,7 @@ from passlib.hash import sha256_crypt as sha
 import argparse
 import sys
 import paillier as pail
+import os
 import configparser as cf
 import pickle
 
@@ -23,20 +24,20 @@ def createPass(user, pa):
 
     userD = {}
 
-    with open('UserDB.pkl', 'rb') as fb:
-        userD = pickle.load(fb)
-
-    print(userD)
+    if os.path.isfile('UserDB.pkl'):
+        with open('UserDB.pkl', 'rb') as fb:
+            userD = pickle.load(fb)
 
     if 'USER_DICT' in userD:
         print("ADDING NEW USER")
-        print(userD['USER_DICT'])
         userD['USER_DICT'].append({username: (password, priv, pub)})
 
     else:
         userD = {'USER_DICT': [{username: (password, priv, pub)}]}
-        with open('UserDB.pkl', 'wb') as fw:
-            pickle.dump(userD, fw)
+
+    with open('UserDB.pkl', 'wb') as fw:
+        pickle.dump(userD, fw)
+
     print(userD)
 
 if __name__ == '__main__':
