@@ -181,7 +181,23 @@ td, th {
     padding : 20px;
 }
  
- 
+
+
+
+.table{
+    max-width : 90%;
+    margin : auto;
+    background-color : white;
+    padding-bottom : 60px;
+}
+
+.table td,
+.table th{
+    border: 1px solid #dddddd;
+    text-align : center;
+}
+
+
  
  
  

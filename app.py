@@ -1,15 +1,14 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, flash
 from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
+import pickle
 import hashlib
+from create_account import createPass
 
 config = cf.ConfigParser()
 config.read('config.ini')
 
-encrypted_dict = config['DEFAULT']['USER_DICT']
-#encrypted_pass = config['DEFAULT']['PASSWORD']
-#encrypted_user = config['DEFAULT']['USER']
 port = config['DEFAULT']['PORT']
 host = config['DEFAULT']['HOST']
 tournieId = ""
@@ -23,30 +22,36 @@ def login():
 
 @app.route('/verify_login/', methods=['GET','POST'])
 def verify_login():
-    if 'username' in request.form and 'password' in request.form:
-        en_dic = encrypted_dict.replace("'", "\"")
-        dd = json.loads(en_dic)
+    result = [0, 0, 0]
 
-        #if you enter "teto" in the username space it checks
+    checkUser, checkPass = False, False
+    if 'username' in request.form and 'password' in request.form:
+
+        '''
         text = "teto"
         valeur = hashlib.sha256(text.encode('utf-8')).hexdigest()
         if(valeur == request.form['username']):
             print('It is checked')
-        else :
+        else:
             print('error sha256 is different')
 
-        print(request.form['username'], '   ::   ', valeur)
+        #print(request.form['username'], '   ::   ', valeur)
+        '''
 
-        for key, val in dd.items():
-            checkUser = sha.verify(request.form['username'], key)
-            if checkUser == True:
-                checkPass = sha.verify(request.form['password'], val)
+        with open('UserDB.pkl', 'rb') as fr:
+            dd = pickle.load(fr)
 
-                if checkUser == True and checkPass == True:
-                    session['username'] = request.form['username']
-                    return render_template('auction.html', username=request.form['username'])
+        for tup in dd['USER_DICT']:
+            for key, val in tup.items():
+                checkUser = sha.verify(request.form['username'], key)
+                if checkUser == True:
+                    checkPass = sha.verify(request.form['password'], val[0])
 
-        if checkUser == False or checkPass == False:
+                    if checkUser == True and checkPass == True:
+                        session['username'] = request.form['username']
+                        return render_template('auction.html', result = result)
+
+        if checkUser == False and checkPass == False:
             return render_template('login.html',error='Wrong Username/Password')
 
     return render_template('login.html')
@@ -59,6 +64,55 @@ def refresh_tourney():
 
     return render_template('login.html')
     #return render_template('index.html', tourn_id = tournieId, eventList = jData['eventList'], blueTeam = blueTeam, redTeam = redTeam)
+
+
+
+@app.route('/create_account/', methods=['GET', 'POST'])
+def create_account():
+
+    createPass(request.form['username'], request.form['password'])
+    flash('Your account have been created successfully.')
+    return render_template('login.html')
+
+
+@app.route('/updateBid/', methods=['GET', 'POST'])
+def updateBid():
+
+    if 'bid' in request.form and 'publicKey' in request.form and 'bidid' in request.form:
+
+        print("bid is ", request.form['bid'])
+
+        with open('BidDB.pkl', 'rb') as fr:
+            bids = pickle.load(fr)
+        with open('UserDB.pkl', 'rb') as f:
+            users = pickle.load(f)
+
+        for keys in users['USER_DICT']:
+            #should check if given public key exist and is the same as the user's
+            for key in keys.items():
+                #when key found look at the bids
+
+                for tup in bids['BIDS']:
+                    for val in tup.items():
+                        #Place bid in file and compare to other
+                        return render_template('auction.html')
+        return render_template('auction.html')
+    return render_template('auction.html')
+
+
+
+
+@app.route('/refresh/', methods=['GET', 'POST'])
+def refresh():
+    #update infos
+    result = [1230, 2000 ,50]
+    return render_template('auction.html', result = result)
+
+
+
+
+
+
 
 
 

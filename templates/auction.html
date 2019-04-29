@@ -14,36 +14,8 @@
             <title>Reminder App</title>
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-dark">
-                
                 <!-- Navbar brand -->
                 <a class="navbar-brand" href="#">Auction Security Project</a>
-                
-                <!-- Collapse button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <!-- Collapsible content -->
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-                    
-                    <!-- Links -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Auction</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Bids</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Collapsible content -->
-                
             </nav>
             <!--/.Navbar-->
     </head>
@@ -55,256 +27,140 @@
                  <p>Choose the products you want and make a bid.</p>
             </div>
         </div>
+
+        <br>
         
-        
-        <!-- Card deck 1 -->
-        <div class="card-deck">
-            
-            <!-- Card -->
-            <div class="card mb-4">
-                <!--Card content-->
-                <div class="card-body">
-                    
-                    <!--Title-->
-                    <h4 class="card-title">Product Name</h4>
-                    <!--Text-->
-                    <p class="card-text">Description of the product. Description of the product. Description of the product. Description of the product. Description of the product. </p>
-                </div>
-                <!--Card image-->
-                <div class="view overlay">
-                    <img class="card-img-bottom" src="https://apps.shopifycdn.com/listing_images/4bb86c75e2b446d749fc29028873634f/icon/42b9af619f2db509bc0a0018791a6efc.png" alt="Card image cap">
-                        <a href="#!">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                        </div>
-                <div id="buttons-set" class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <!-- Form dropdown -->
-                            <button class="btn btn-outline-primary waves-effect" id="" type="button" data-toggle="dropdown"
-                                >Make bid</button>
-                            <!-- aria-haspopup="true" aria-expanded="false" -->
-                            <div class="dropdown-menu" id="biddropdown" role="menu">
-                                <div class="card" id="bidCard">
-                                    
-                                    <h5 class="card-header info-color white-text text-center py-4">
-                                        <button type="button ml-auto" class="close" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <strong>Make your bid</strong>
-                                    </h5>
-                                    
-                                    <!--Card content-->
-                                    <div class="card-body px-lg-5 pt-0">
-                                        
-                                        <!-- Form -->
-                                        <form class="text-center" style="color: #757575;" >
-                                            <!-- Public Key -->
-                                            <div class="md-form">
-                                                <input type="password" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Public Key</label>
-                                                    <small id="" class="form-text text-muted mb-4">
-                                                        Paste your public Key to encrypt your bid.
-                                                    </small>
-                                                    </div>
-                                            
-                                            <!-- Bid Amount -->
-                                            <div class="md-form">
-                                                <input type="number" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Amount $</label>
-                                                    </div>
-                                            
-                                            <br>
-                                            <!-- Sign up button -->
-                                            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
-                                        </form>
-                                        <!-- Form -->
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <!-- Material form register -->
-                            </div>
-                            <!-- Form dropdown -->
-                        </div>
-                        <div class="col-sm">
-                            <form id="getTournForm" action="/get_auctions/" method="get">
-                                <button type="submit" class="btn btn-outline-primary waves-effect">Description</button>
+        <table class="table">
+            <thead class="black white-text">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Bid</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Iphone</td>
+                    <td>Iphone 8 white 128GB</td>
+                    <td>$ {{ result[0]}}</td>
+                    <td>Processing
+                    <div class="dropdown">
+                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Make a Bid
+                          </button>
+
+                          <div class="dropdown-menu">
+                            <form class="px-4 py-3" action="/updateBid/" method="POST">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Bid $" name="bid" required>
+                              </div>
+                              <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Public Key" name="publicKey" required>
+                              </div>
+                                <small class="form-text text-muted mb-4">
+                                    Your public key which was given to you when you created your account will encrypt your bid locally.
+                                    This way nobody can see what your bid is.
+                                </small>
+                                <input type="hidden" id="bidID1" name="bidid" value="1">
+                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[0])">Submit</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Card -->
-            
-            <!-- Card -->
-            <div class="card mb-4">
-                <!--Card content-->
-                <div class="card-body">
-                    
-                    <!--Title-->
-                    <h4 class="card-title">Product Name</h4>
-                    <!--Text-->
-                    <p class="card-text">Description of the product. Description of the product. Description of the product. Description of the product. Description of the product. </p>
-                </div>
-                <!--Card image-->
-                <div class="view overlay">
-                    <img class="card-img-bottom" src="https://apps.shopifycdn.com/listing_images/4bb86c75e2b446d749fc29028873634f/icon/42b9af619f2db509bc0a0018791a6efc.png" alt="Card image cap">
-                        <a href="#!">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                        </div>
-                <div id="buttons-set" class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <!-- Form dropdown -->
-                            <button class="btn btn-outline-primary waves-effect" id="" type="button" data-toggle="dropdown"
-                                >Make bid</button>
-                            <!-- aria-haspopup="true" aria-expanded="false" -->
-                            <div class="dropdown-menu" id="biddropdown" role="menu">
-                                <div class="card" id="bidCard">
-                                    
-                                    <h5 class="card-header info-color white-text text-center py-4">
-                                        <button type="button ml-auto" class="close" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <strong>Make your bid</strong>
-                                    </h5>
-                                    
-                                    <!--Card content-->
-                                    <div class="card-body px-lg-5 pt-0">
-                                        
-                                        <!-- Form -->
-                                        <form class="text-center" style="color: #757575;">
-                                            <!-- Public Key -->
-                                            <div class="md-form">
-                                                <input type="password" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Public Key</label>
-                                                    <small id="" class="form-text text-muted mb-4">
-                                                        Paste your public Key to encrypt your bid.
-                                                    </small>
-                                                    </div>
-                                            
-                                            <!-- Bid Amount -->
-                                            <div class="md-form">
-                                                <input type="number" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Amount $</label>
-                                                    </div>
-                                            
-                                            <br>
-                                            <!-- Sign up button -->
-                                            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
-                                        </form>
-                                        <!-- Form -->
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <!-- Material form register -->
-                            </div>
-                            <!-- Form dropdown -->
-                        </div>
-                        <div class="col-sm">
-                            <form id="getTournForm" action="/get_auctions/" method="get">
-                                <button type="submit" class="btn btn-outline-primary waves-effect">Description</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bike</td>
+                    <td>Green race bike</td>
+                    <td>$ {{ result[1]}}</td>
+                    <td>Lost
+                    <div class="dropdown">
+                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Make a Bid
+                          </button>
+
+                          <div class="dropdown-menu">
+                            <form class="px-4 py-3">
+                              <div class="form-group">
+                                <input type="text" class="form-control"  placeholder="Bid $" >
+                              </div>
+                              <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Public Key">
+                              </div>
+                                <small class="form-text text-muted mb-4">
+                                    Your public key which was given to you when you created your account will encrypt your bid locally.
+                                    This way nobody can see what your bid is.
+                                </small>
+                                <input type="hidden" id="bidID2" name="bidid" value="2">
+                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Card -->
-            
-            <!-- Card -->
-            <div class="card mb-4">
-                <!--Card content-->
-                <div class="card-body">
-                    
-                    <!--Title-->
-                    <h4 class="card-title">Product Name</h4>
-                    <!--Text-->
-                    <p class="card-text">Description of the product. Description of the product. Description of the product. Description of the product. Description of the product. </p>
-                </div>
-                <!--Card image-->
-                <div class="view overlay">
-                    <img class="card-img-bottom" src="https://apps.shopifycdn.com/listing_images/4bb86c75e2b446d749fc29028873634f/icon/42b9af619f2db509bc0a0018791a6efc.png" alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <div id="buttons-set" class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <!-- Form dropdown -->
-                            <button class="btn btn-outline-primary waves-effect" id="" type="button" data-toggle="dropdown"
-                                 >Make bid</button>
-                            <!-- aria-haspopup="true" aria-expanded="false" -->
-                            <div class="dropdown-menu" id="biddropdown" role="menu">
-                                <div class="card" id="bidCard">
-                                    
-                                    <h5 class="card-header info-color white-text text-center py-4">
-                                        <button type="button ml-auto" class="close" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <strong>Make your bid</strong>
-                                    </h5>
-                                    
-                                    <!--Card content-->
-                                    <div class="card-body px-lg-5 pt-0">
-                                        
-                                        <!-- Form -->
-                                        <form class="text-center" style="color: #757575;">
-                                            <!-- Public Key -->
-                                            <div class="md-form">
-                                                <input type="password" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Public Key</label>
-                                                    <small id="" class="form-text text-muted mb-4">
-                                                        Paste your public Key to encrypt your bid.
-                                                    </small>
-                                            </div>
-                                            
-                                            <!-- Bid Amount -->
-                                            <div class="md-form">
-                                                <input type="number" id="publicKey" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Amount $</label>
-                                            </div>
-                                            
-                                            <br>
-                                            <!-- Sign up button -->
-                                            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
-                                        </form>
-                                        <!-- Form -->
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <!-- Material form register -->
-                            </div>
-                            <!-- Form dropdown -->
-                        </div>
-                        <div class="col-sm">
-                            <form id="getTournForm" action="/get_auctions/" method="get">
-                                <button type="submit" class="btn btn-outline-primary waves-effect">Description</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Chromecast</td>
+                    <td>Black chromecast v2 </td>
+                    <td>$ {{ result[2]}}</td>
+                    <td>Won
+                    <div class="dropdown">
+                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Make a Bid
+                          </button>
+
+                          <div class="dropdown-menu">
+                            <form class="px-4 py-3">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Bid $" >
+                              </div>
+                              <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Public Key">
+                              </div>
+                                <small class="form-text text-muted mb-4">
+                                    Your public key which was given to you when you created your account will encrypt your bid locally.
+                                    This way nobody can see what your bid is.
+                                </small>
+                                <input type="hidden" id="bidID3" name="bidid" value="3">
+                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
                             </form>
                         </div>
-                        </div>
                     </div>
-                </div>
-            <!-- Card -->
-            
-            
-        </div>
-        <!-- Card deck 1 -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         
         
         <div id="refresh">
-            <form id="btn-refresh" action="/get_auctions/" method="get">
+            <form id="btn-refresh" action="/refresh/" method="POST">
                 <button type="submit" class="btn peach-gradient waves-effect">Refresh</button>
             </form>
         </div>
-        
+
+
+         <script type="text/javascript" >
+                function encryptBid(form){
+                    var plain = form.bid
+                    var pub = form.publicKey;
+                    var enc = encrypt(pub.value, plain.value);
+                    plain.value = enc;
+                 }
+            </script>
         
         
         <!-- SCRIPTS -->
+        <script type="text/javascript"  src="../paillier.js"></script>
+        <!-- SHA-256 -->
+        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
+        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
         <!-- JQuery -->
         <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
         <!-- Bootstrap tooltips -->

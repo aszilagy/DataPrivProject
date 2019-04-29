@@ -54,29 +54,17 @@
                                     <div class="card-body px-lg-5 pt-0">
 
                                         <!-- Form -->
-                                        <form  action="/create_account/" method="GET">
-                                            <!-- Public Key -->
-                                            <div class="md-form">
-                                                <input type="tetx" id="username" name="username" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Username</label>
-                                                </input>
-                                            </div>
-
-                                            <!-- Bid Amount -->
-                                            <div class="md-form">
-                                                <input type="password" id="password" name="password" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                                                    <label for="#">Password</label>
-                                                 </input>
-                                            </div>
+                                        <form  action="/create_account/" method="post" id="create_account">
+                                            <br>
+                                            <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" required>
+                                            <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" required>
 
                                             <br>
                                             <!-- Sign up button -->
                                             <p><input type = "submit" value = "submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"/></p>
                                         </form>
                                         <!-- Form -->
-
                                     </div>
-
                                 </div>
                                 <!-- Material form register -->
                             </div>
@@ -104,10 +92,10 @@
                 {% with messages = get_flashed_messages() %}
                    {% if messages %}
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <h4 class="alert-heading">Error</h4>
-                            <p> You entered a wrong username or password. {% for message in messages %} <li>{{ message }}</li> {% endfor %}</p>
+                            <h4 class="alert-heading">Congratulation</h4>
+                            <p> {% for message in messages %} <li>{{ message }}</li> {% endfor %}</p>
                             <hr>
-                            <p class="mb-0">If you do not have an account, you can create on <a href="#" class="alert-link">here</a>.</p>
+                            <p class="mb-0">You can now log into your account.</a>.</p>
                         </div>
                    {% endif %}
                 {% endwith %}
@@ -122,11 +110,10 @@
                             <h6>Password : </h6><input id="mdp" type="password" name="password"/><br><br>
 
 
-                            <input type="submit"  id="buttonco" onclick="encrypt();"><font color="white" /><h6>Connexion</h6></input>
+                            <input type="submit"  id="buttonco" ><!--onclick="encrypt();"--> <font color="white" /><h6>Connexion</h6></input>
                         </form>
                     </div>
                 </div><br>
-
           </div>
         </main>
 
