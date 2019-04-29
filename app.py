@@ -47,9 +47,9 @@ def verify_login():
                 if checkUser == True:
                     checkPass = sha.verify(request.form['password'], val[0])
 
-                    if checkUser == True and checkPass == True:
-                        session['username'] = request.form['username']
-                        return render_template('auction.html', result = result)
+                if checkUser == True and checkPass == True:
+                    session['username'] = request.form['username']
+                    return render_template('auction.html', username=request.form['username'], result = result)
 
         if checkUser == False and checkPass == False:
             return render_template('login.html',error='Wrong Username/Password')
