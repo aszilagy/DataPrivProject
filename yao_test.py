@@ -1,11 +1,18 @@
 from simpleRSA import *
 import random
+import sys
 
 public_key, private_key = make_key_pair(12)  # safe for n<100
 
 
-A = random.randint(1,9)
-B = random.randint(1,9)
+
+if len(sys.argv) < 3:
+    print("python yao_test.py <userA_bid> <userB_bid>")
+    sys.exit()
+
+
+A = int(sys.argv[1]) #random.randint(1,9)
+B = int(sys.argv[2]) #random.randint(1,9)
 
 def safeCmpAleB(a,b):
     print("\nA has i={} millions and B has j={} millions".format(a,b))
@@ -35,5 +42,5 @@ def safeCmpAleB(a,b):
     else:
         return False
     
-print(safeCmpAleB(A,B))
-print(A>=B)
+print("UserA bid is accepted:",safeCmpAleB(A,B))
+print("UserA >= UserB:",A>=B)
