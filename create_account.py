@@ -8,7 +8,6 @@ import pickle
 
 
 def main():
-
     if len(sys.argv) < 3:
         print("Wrong arguments, use format of:   python create_account.py <username> <password>")
 
