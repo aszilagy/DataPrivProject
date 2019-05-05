@@ -4,8 +4,6 @@ import sys
 
 public_key, private_key = make_key_pair(12)  # safe for n<100
 
-
-
 if len(sys.argv) < 3:
     print("python yao_test.py <userA_bid> <userB_bid>")
     sys.exit()
@@ -15,7 +13,7 @@ A = int(sys.argv[1]) #random.randint(1,9)
 B = int(sys.argv[2]) #random.randint(1,9)
 
 def safeCmpAleB(a,b):
-    print("\nA has i={} millions and B has j={} millions".format(a,b))
+    print("\nA bid is i={} and B bid is j={}".format(a,b))
     print("\nA generate a pair of RSA key:")
     print("The public key is {}, which is shared in public".format(public_key))
     print("The private key is {}, which is only hold by A\n".format(private_key))
@@ -23,7 +21,7 @@ def safeCmpAleB(a,b):
     print("Step 1:   B generate a large random number: ".format(x))
     K = public_key.encrypt(x)
     print("\tB encryt it with the shared public key to generate a cipher K: ".format(K))
-    print("\tthen B send c=K-j({}-{}={} to A\n".format(K,b,K-b))
+    print("\tthen B send c=K-j = {}-{}={} to A\n".format(K,b,K-b))
     c = K - b  
     p=29
     d=[]
