@@ -14,9 +14,9 @@
  */
 function generate() {
 
-   var keyS=1024
+   var keyS = 1024
   // set up variables for key generation
-  const e = bigInt(65537);  // use fixed public exponent
+  const e = BigInt(65537);  // use fixed public exponent
   let p;
   let q;
   let lambda;
@@ -25,8 +25,8 @@ function generate() {
   do {
     p = randomPrime(keyS / 2);
     q = randomPrime(keyS / 2);
-    lambda = bigInt.lcm(p.minus(1), q.minus(1));
-  } while (bigInt.gcd(e, lambda).notEquals(1) || p.minus(q).abs().shiftRight(keyS / 2 - 100).isZero());
+    lambda = BigInt.lcm(p.minus(1), q.minus(1));
+  } while (BigInt.gcd(e, lambda).notEquals(1) || p.minus(q).abs().shiftRight(keyS / 2 - 100).isZero());
   debugger;
   return {
     n: p.multiply(q),  // public key (part I)
@@ -42,10 +42,10 @@ function generate() {
    * @returns {bigInt} a random generated prime
    */
 function randomPrime(bits) {
-    const min = bigInt(6074001000).shiftLeft(bits - 33);  // min ≈ √2 × 2^(bits - 1)
-    const max = bigInt.one.shiftLeft(bits).minus(1);  // max = 2^(bits) - 1
+    const min = BigInt(6074001000).shiftLeft(bits - 33);  // min ≈ √2 × 2^(bits - 1)
+    const max = BigInt.one.shiftLeft(bits).minus(1);  // max = 2^(bits) - 1
     for (;;) {
-      const p = bigInt.randBetween(min, max);  // WARNING: not a cryptographically secure RNG!
+      const p = BigInt.randBetween(min, max);  // WARNING: not a cryptographically secure RNG!
       if (p.isProbablePrime(256)) {
         return p;
       }
@@ -62,7 +62,7 @@ function randomPrime(bits) {
  * @returns {bigInt} encrypted message
  */
 function encrypt(m, n, e) {
-  return bigInt(m).modPow(e, n);
+  return BigInt(m).modPow(e, n);
 };
 
 
@@ -78,7 +78,7 @@ function encrypt(m, n, e) {
  * @returns {bigInt} decrypted message
  */
 function decrypt(c, d, n) {
-  return bigInt(c).modPow(d, n);
+  return BigInt(c).modPow(d, n);
 };
 
 
