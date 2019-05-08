@@ -2,26 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/auction.css">
-    <script>
-      function myFunction(oFrom) {
-	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
-	console.log(randomX);
-	var a = oFrom.elements["bid"].value;
-	var keys = generate();
-	var K = encrypt(randomX, keys.n, keys.e);
-
-	var c = K-a;
-	console.log(c);
-
-	var encrypt = encrypt(a, keys.n, keys.e);
-	var msg = decrypt(encrypt, keys.d, keys.n);
-
-	document.getElementById("demo").innerHTML = msg;
-      }
-    </script>
-  </head>
-  <body>
+            <link rel="stylesheet" href="../static/css/auction.css">
+<script>
+function myFunction(oFrom) {
+    a = oFrom.elements["bid"].value;
+    oFrom.elements["lastname"].value = a;
+}
+</script>
+</head>
+<body>
 
     <p id="demo">A Paragraph</p>
 
@@ -30,12 +19,12 @@
 
 
 
-    <form action="/action_page.php">
+    <form action="/refresh/" method="POST">
       First name:<br>
       <input type="text" name="Bid" id="bid" >
       <br>
       Last name:<br>
-      <input type="text" name="lastname" value="Mouse" id="lastname" >
+      <input type="text" name="lastname" value="1" id="lastname" >
       <br><br>
       <input type="submit" value="Submit" onclick="myFunction(this.form)">
     </form>

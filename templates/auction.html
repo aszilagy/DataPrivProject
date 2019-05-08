@@ -71,7 +71,7 @@
 		    <input type="text" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
 		  </div>
 		  <div class="form-group">
-		    <input type="text" class="form-control" placeholder="C Key" name="cval" id="cval">
+		    <input type="text" class="form-control" placeholder="C Key" name="val" id="val" value="1">
 		  </div>
 		  <small class="form-text text-muted mb-4">
 		    Your public key which was given to you when you created your account will encrypt your bid locally.
@@ -160,11 +160,11 @@
       function myFunction(oFrom) {
 	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
 	console.log(randomX);
-	var a = oFrom.elements["bid"].value;
-	var keys = generate();
-	var K = encrypt(randomX, keys.n, keys.e);
+	a = oFrom.elements["bid"].value;
+	keys = generate();
+	K = encrypt(randomX, keys.n, keys.e);
 
-	var c = K-a;
+	c = K-a;
 	console.log(c);
 
 	//var d = 10;
@@ -172,9 +172,10 @@
 	//var encrypted = encrypt(a, keys.n, keys.e);
 	//var multi = encrypted * en;
 	//var msg = decrypt(multi, keys.d, keys.n);
-	oFrom.elements["publicKey"].value = msg;
-	document.getElementById('cval').value = c;
-	//oFrom.elements["cval"].value = c;
+
+	//oFrom.elements["publicKey"].value = msg;
+	//document.getElementById('val').value = c;
+	oFrom.elements["val"].value = c;
       }
     </script>
 
