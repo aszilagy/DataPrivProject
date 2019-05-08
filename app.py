@@ -86,11 +86,23 @@ def updateBid():
     if 'bid' in request.form and 'publicKey' in request.form and 'bidid' in request.form:
 
         print("bid is ", request.form['bid'])
+        bid = request.form['bid'];
+        item = "x1" #get client session name so it is identified
+        time = 0 #get the time when bid was made
 
         with open('BidDB.pkl', 'rb') as fr:
             bids = pickle.load(fr)
         with open('UserDB.pkl', 'rb') as f:
             users = pickle.load(f)
+
+        if 'BIDS' in users:
+            print("Updating Bids")
+            users['BIDS'].append({item: (bid, time)})
+
+        else:
+            users = {'BIDS': [{item: (bid, time)}]}
+
+
 
         for keys in users['USER_DICT']:
             #should check if given public key exist and is the same as the user's
@@ -103,6 +115,15 @@ def updateBid():
                         return render_template('auction.html')
         return render_template('auction.html')
     return render_template('auction.html')
+
+
+
+@app.route('/checkRSA/', methods=['GET', 'POST'])
+def check():
+    print("Bid is : ", request.form['bid'])
+    print("Result is : ", request.form['decr'])
+    result = []
+    return render_template('auction.html', result = result)
 
 
 

@@ -14,7 +14,7 @@
  */
 function generate() {
 
-   var keyS=1024
+   var keyS = 1024
   // set up variables for key generation
   const e = bigInt(65537);  // use fixed public exponent
   let p;
