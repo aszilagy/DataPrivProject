@@ -63,12 +63,13 @@
 	      </button>
 
 	      <div class="dropdown-menu">
-		<form class="px-4 py-3" action="/checkRSA/" method="POST">
+		<form id="submitForm" class="px-4 py-3" action="/checkRSA/" method="POST">
 		  <div class="form-group">
 		    <input type="text" class="form-control" placeholder="Bid $" name="bid" id="bid" required>
 		  </div>
 		  <div class="form-group">
-		    <input type="text" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
+		    <input type="text" class="form-control" placeholder="Public Key" name="publicKey_n" id="publicKey_n" value={{public_key[0]}}>
+		    <input type="text" class="form-control" placeholder="Public Key" name="publicKey_e" id="publicKey_e" value={{public_key[1]}}>
 		  </div>
 		  <div class="form-group">
 		    <input type="text" class="form-control" placeholder="C Key" name="val" id="val" value="1">
@@ -150,6 +151,7 @@
 
 
     <div id="refresh">
+      <button type="submit" class="btn btn-mdb-color" onclick="finalCheck()">FinalCheck</button>
       <form id="btn-refresh" action="/refresh/" method="POST">
 	<button type="submit" class="btn peach-gradient waves-effect">Refresh</button>
       </form>
@@ -159,24 +161,40 @@
     <script type="text/javascript" >
       function myFunction(oFrom) {
 	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+	n = oFrom.elements["publicKey_n"].value;
+	e = oFrom.elements["publicKey_e"].value;
 	console.log(randomX);
 	a = oFrom.elements["bid"].value;
-	keys = generate();
-	K = encrypt(randomX, keys.n, keys.e);
+	K = encrypt(randomX, n, e);
 
 	c = K-a;
-	console.log(c);
+	console.log("C val " + c);
 
-	//var d = 10;
-	//var en = encrypt(d, keys.n, keys.e);
-	//var encrypted = encrypt(a, keys.n, keys.e);
-	//var multi = encrypted * en;
-	//var msg = decrypt(multi, keys.d, keys.n);
-
-	//oFrom.elements["publicKey"].value = msg;
-	//document.getElementById('val').value = c;
 	oFrom.elements["val"].value = c;
+	return [randomX, n, e, a];
       }
+function finalCheck(){
+  var oFrom = document.getElementById('submitForm');
+  listVal = myFunction(oFrom);
+  var d = {{ result }};
+  x = listVal[0];
+  n = listVal[1];
+  e = listVal[2];
+  b = listVal[3];
+  //d = oFrom.elements["result_matrix"].value;
+  console.log("D val " + d);
+  console.log("B val " + b);
+  console.log("X val " + x);
+  console.log("d[b] " + d[b] + " " + x%29);
+  console.log("d[b-1] " + d[b-1] + " " + x%29);
+
+  if(x%29 == (d[b-1]-1)){
+    alert("Winner!");
+  }
+  else{
+    alert("Loser!");
+  }
+}
     </script>
 
 

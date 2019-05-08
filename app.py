@@ -5,6 +5,7 @@ import json
 import pickle
 import hashlib
 from create_account import createPass
+import yao_test as yao
 
 config = cf.ConfigParser()
 config.read('config.ini')
@@ -22,7 +23,8 @@ def login():
 
 @app.route('/verify_login/', methods=['GET','POST'])
 def verify_login():
-    result = [0, 0, 0]
+    #result = [0, 0, 0]
+    result = None
 
     checkUser, checkPass = False, False
     if 'username' in request.form and 'password' in request.form:
@@ -48,8 +50,12 @@ def verify_login():
                     checkPass = sha.verify(request.form['password'], val[0])
 
                 if checkUser == True and checkPass == True:
+                    with open('Keys.pkl', 'rb') as fr:
+                        keys = pickle.load(fr)
+                        pub = keys['KEY_DICT'][0]
+                        print(pub.n)
                     session['username'] = request.form['username']
-                    return render_template('auction.html', username=request.form['username'], result = result)
+                    return render_template('auction.html', username=request.form['username'], result = result, public_key=[pub.n, pub.e])
 
         if checkUser == False and checkPass == False:
             return render_template('login.html',error='Wrong Username/Password')
@@ -119,35 +125,26 @@ def updateBid():
 
 @app.route('/checkRSA/', methods=['GET', 'POST'])
 def check():
-    print("Bid is : ", request.form["bid"])
-    print("decrypt is : ", request.form["publicKey"])
+    result = None
+
+    with open('Keys.pkl', 'rb') as fr:
+        keys = pickle.load(fr)
+        pub = keys['KEY_DICT'][0]
+        priv = keys['KEY_DICT'][1]
+
+    a = 55
     if 'val' in request.form:
-        print("val is : ", request.form["val"])
-    else:
-        print("Didn't find val")
-
-    if 'bid' in request.form:
-        print("bid is : ", request.form["bid"])
-        print("publicKey is : ", request.form["publicKey"])
-    result = []
-    return render_template('auction.html', result = result)
-
-
-
+        d = yao.serverSide(a, int(request.form["val"]));
+        print("HERE IS X",int(request.form["val"]))
+        result = d 
+        print("Giving",result)
+    return render_template('auction.html', result = result, public_key=[pub.n, pub.e])
 
 @app.route('/refresh/', methods=['GET', 'POST'])
 def refresh():
 
     #update infos
-    result = [request.form["lastname"]]
-    return render_template('auction.html', result = result)
-
-
-
-
-
-
-
+    return render_template('auction.html')
 
 
 if __name__ == '__main__':
