@@ -12,15 +12,11 @@
 <script>
 function myFunction(oFrom) {
     var a = oFrom.elements["bid"].value;
-    debugger;
     var keys = generate();
-    debugger;
     var encrypt = encrypt(a, keys.n, keys.e);
-    debugger;
     var msg = decrypt(encrypt, keys.d, keys.n);
-    debugger;
 
-    document.getElementById("demo").innerHTML = msg;
+    document.getElementById("bidID1").innerHTML = msg;
     debugger;
 }
 </script>
@@ -63,6 +59,7 @@ function myFunction(oFrom) {
 
 <!-- SCRIPTS -->
         <script type="text/javascript"  src="../static/js/RSA.js"></script>
+        <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
 
 <!-- JQuery -->
         <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>

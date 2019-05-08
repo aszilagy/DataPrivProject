@@ -67,6 +67,11 @@ def refresh_tourney():
 
 
 
+
+@app.route('/trial/', methods=['GET', 'POST'])
+def create():
+    return render_template('trial.html')
+
 @app.route('/create_account/', methods=['GET', 'POST'])
 def create_account():
 
