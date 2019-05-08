@@ -27,7 +27,6 @@ function generate() {
     q = randomPrime(keyS / 2);
     lambda = bigInt.lcm(p.minus(1), q.minus(1));
   } while (bigInt.gcd(e, lambda).notEquals(1) || p.minus(q).abs().shiftRight(keyS / 2 - 100).isZero());
-  debugger;
   return {
     n: p.multiply(q),  // public key (part I)
     e: e,  // public key (part II)
