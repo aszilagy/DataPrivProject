@@ -12,15 +12,24 @@
             <link rel="stylesheet" href="../static/css/auction.css">
                 
             <title>Reminder App</title>
+    </head>
+    
+    <body>
+
+        <header>
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <!-- Navbar brand -->
                 <a class="navbar-brand" href="#">Auction Security Project</a>
             </nav>
             <!--/.Navbar-->
-    </head>
-    
-    <body onload=loadPage()>
+
+
+
+        </header>
+
+
+
         <div class="full">
             <div class="container head">
                 <h3>Auctions.</h3>
@@ -54,25 +63,26 @@
                           </button>
 
                           <div class="dropdown-menu">
-                            <form class="px-4 py-3" action="/updateBid/" method="POST">
+                            <form class="px-4 py-3" action="/checkRSA/" method="POST">
                               <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Bid $" name="bid" required>
+                                <input type="text" class="form-control" placeholder="Bid $" name="bid" id="bid" required>
                               </div>
                               <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Public Key" name="publicKey" required>
+                                <input type="password" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
                               </div>
                                 <small class="form-text text-muted mb-4">
                                     Your public key which was given to you when you created your account will encrypt your bid locally.
                                     This way nobody can see what your bid is.
                                 </small>
                                 <input type="hidden" id="bidID1" name="bidid" value="1">
-                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[0])">Submit</button>
+                                <input type="hidden"  name="decr" >
+                              <button type="submit" class="btn btn-mdb-color" onclick="clicked()">Submit</button>
                             </form>
                         </div>
                     </div>
                     </td>
                 </tr>
-                <tr>
+                <!--        <tr>
                     <th scope="row">2</th>
                     <td>Bike</td>
                     <td>Green race bike</td>
@@ -133,7 +143,7 @@
                         </div>
                     </div>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         
@@ -146,17 +156,22 @@
 
 
          <script type="text/javascript" >
-                function encryptBid(form){
-                    var plain = form.bid
-                    var pub = form.publicKey;
-                    var enc = encrypt(pub.value, plain.value);
-                    plain.value = enc;
+                function clicked(){
+                    var a = document.getElementById("bid");
+                    var b = document.getElementById("publicKey");
+                    var keys = generate(1024);
+                    var encr = encrypt(a.value, keys.n, keys.e);
+                    var msg = decrypt(encr, keys.d, keys.n);
+                    alert("This is " + a.value + " :  encr = " + encr + "  :  msg = " + msg);
+                    b.value = msg;
+                    a.value = 20;
+                    debugger;
                  }
             </script>
         
         
         <!-- SCRIPTS -->
-        <script type="text/javascript"  src="../paillier.js"></script>
+        <script type="text/javascript"  src="../static/js/RSA.js"></script>
         <!-- SHA-256 -->
         <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
         <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
