@@ -117,11 +117,16 @@ def updateBid():
     return render_template('auction.html')
 
 
-
 @app.route('/checkRSA/', methods=['GET', 'POST'])
 def check():
-    print("Bid is : ", request.form["bid"])
-    print("Bid is : ", request.form["publicKey"])
+    if 'cval' in request.form:
+        print("cval is : ", request.form["cval"])
+    else:
+        print("Didn't find cval")
+
+    if 'bid' in request.form:
+        print("bid is : ", request.form["bid"])
+        print("publicKey is : ", request.form["publicKey"])
     result = []
     return render_template('auction.html', result = result)
 

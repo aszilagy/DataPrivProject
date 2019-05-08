@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-            <link rel="stylesheet" href="../static/css/auction.css">
-<script>
-function myFunction(oFrom) {
-    var a = oFrom.elements["bid"].value;
-    debugger;
-    var keys = generate();
-    debugger;
-    var encrypt = encrypt(a, keys.n, keys.e);
-    debugger;
-    var msg = decrypt(encrypt, keys.d, keys.n);
-    debugger;
+    <link rel="stylesheet" href="../static/css/auction.css">
+    <script>
+      function myFunction(oFrom) {
+	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+	console.log(randomX);
+	var a = oFrom.elements["bid"].value;
+	var keys = generate();
+	var K = encrypt(randomX, keys.n, keys.e);
 
-    document.getElementById("demo").innerHTML = msg;
-    debugger;
-}
-</script>
-</head>
-<body>
+	var c = K-a;
+	console.log(c);
+
+	var encrypt = encrypt(a, keys.n, keys.e);
+	var msg = decrypt(encrypt, keys.d, keys.n);
+
+	document.getElementById("demo").innerHTML = msg;
+      }
+    </script>
+  </head>
+  <body>
 
     <p id="demo">A Paragraph</p>
 
@@ -40,10 +42,10 @@ function myFunction(oFrom) {
 
 
 
-</body>
+  </body>
 
-<!-- SCRIPTS -->
-        <script type="text/javascript"  src="../static/js/RSA.js"></script>
-        <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
+      <!-- SCRIPTS -->
+      <script type="text/javascript"  src="../static/js/RSA.js"></script>
+      <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
 
 </html>

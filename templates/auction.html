@@ -1,193 +1,205 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    
-    <head>
-        <meta charset="utf-8">
-            <!-- Font Awesome -->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-            <!-- Bootstrap core CSS -->
-            <link href="../static/MDB/css/bootstrap.min.css" rel="stylesheet">
-            <!-- Material Design Bootstrap -->
-            <link href="../static/MDB/css/mdb.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="../static/css/auction.css">
-                
-            <title>Auction Security Project</title>
-    </head>
-    
-    <body>
 
-        <header>
-            <!--Navbar-->
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <!-- Navbar brand -->
-                <a class="navbar-brand" href="#">Auction Security Project</a>
-            </nav>
-            <!--/.Navbar-->
+  <head>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../static/MDB/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../static/MDB/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/auction.css">
 
+    <title>Auction Security Project</title>
+  </head>
 
+  <body>
 
-        </header>
+    <header>
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+	<!-- Navbar brand -->
+	<a class="navbar-brand" href="#">Auction Security Project</a>
+      </nav>
+      <!--/.Navbar-->
 
 
 
-        <div class="full">
-            <div class="container head">
-                <h3>Auctions.</h3>
-                 <p>Choose the products you want and make a bid.</p>
-            </div>
-        </div>
-
-        <br>
-        
-        <table class="table">
-            <thead class="black white-text">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Bid</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Iphone</td>
-                    <td>Iphone 8 white 128GB</td>
-                    <td>$ {{ result[0]}}</td>
-                    <td>Processing
-                    <div class="dropdown">
-                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Make a Bid
-                          </button>
-
-                          <div class="dropdown-menu">
-                            <form class="px-4 py-3" action="/checkRSA/" method="POST">
-                              <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Bid $" name="bid" id="bid" required>
-                              </div>
-                              <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
-                              </div>
-                                <small class="form-text text-muted mb-4">
-                                    Your public key which was given to you when you created your account will encrypt your bid locally.
-                                    This way nobody can see what your bid is.
-                                </small>
-                              <button type="submit" class="btn btn-mdb-color" onclick="myFunction(this.form)">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <!--        <tr>
-                    <th scope="row">2</th>
-                    <td>Bike</td>
-                    <td>Green race bike</td>
-                    <td>$ {{ result[1]}}</td>
-                    <td>Lost
-                    <div class="dropdown">
-                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Make a Bid
-                          </button>
-
-                          <div class="dropdown-menu">
-                            <form class="px-4 py-3">
-                              <div class="form-group">
-                                <input type="text" class="form-control"  placeholder="Bid $" >
-                              </div>
-                              <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Public Key">
-                              </div>
-                                <small class="form-text text-muted mb-4">
-                                    Your public key which was given to you when you created your account will encrypt your bid locally.
-                                    This way nobody can see what your bid is.
-                                </small>
-                                <input type="hidden" id="bidID2" name="bidid" value="2">
-                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Chromecast</td>
-                    <td>Black chromecast v2 </td>
-                    <td>$ {{ result[2]}}</td>
-                    <td>Won
-                    <div class="dropdown">
-                          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Make a Bid
-                          </button>
-
-                          <div class="dropdown-menu">
-                            <form class="px-4 py-3">
-                              <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Bid $" >
-                              </div>
-                              <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Public Key">
-                              </div>
-                                <small class="form-text text-muted mb-4">
-                                    Your public key which was given to you when you created your account will encrypt your bid locally.
-                                    This way nobody can see what your bid is.
-                                </small>
-                                <input type="hidden" id="bidID3" name="bidid" value="3">
-                              <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    </td>
-                </tr> -->
-            </tbody>
-        </table>
-        
-        
-        <div id="refresh">
-            <form id="btn-refresh" action="/refresh/" method="POST">
-                <button type="submit" class="btn peach-gradient waves-effect">Refresh</button>
-            </form>
-        </div>
+    </header>
 
 
-         <script type="text/javascript" >
-                function myFunction(oFrom) {
-                    var a = oFrom.elements["bid"].value;
-                    keys = generate();
-                    var d = 10;
-                    var en = encrypt(d, keys.n, keys.e);
-                    var encrypted = encrypt(a, keys.n, keys.e);
-                    var multi = encrypted * en;
-                    var msg = decrypt(multi, keys.d, keys.n);
-                    oFrom.elements["publicKey"].value = msg;
-                }
-            </script>
-        
-        
-        <!-- SCRIPTS -->
-        <script type="text/javascript"  src="../static/js/RSA.js"></script>
-        <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
-        <!-- SHA-256 -->
-        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
-        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
-        <!-- JQuery -->
-        <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../static/MDB/js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../static/MDB/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../static/MDB/js/mdb.min.js"></script>
-        
-        
+    <div class="full">
+      <div class="container head">
+	<h3>Auctions.</h3>
+	<p>Choose the products you want and make a bid.</p>
+      </div>
+    </div>
 
-        
-    </body>
-    
+    <br>
+
+    <table class="table">
+      <thead class="black white-text">
+	<tr>
+	  <th scope="col">#</th>
+	  <th scope="col">Name</th>
+	  <th scope="col">Description</th>
+	  <th scope="col">Bid</th>
+	  <th scope="col">Status</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <th scope="row">1</th>
+	  <td>Iphone</td>
+	  <td>Iphone 8 white 128GB</td>
+	  <td>$ {{ result[0]}}</td>
+	  <td>Processing
+	    <div class="dropdown">
+	      <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+								       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Make a Bid
+	      </button>
+
+	      <div class="dropdown-menu">
+		<form class="px-4 py-3" action="/checkRSA/" method="POST">
+		  <div class="form-group">
+		    <input type="text" class="form-control" placeholder="Bid $" name="bid" id="bid" required>
+		  </div>
+		  <div class="form-group">
+		    <input type="text" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
+		  </div>
+		  <div class="form-group">
+		    <input type="text" class="form-control" placeholder="C Key" name="cval" id="cval">
+		  </div>
+		  <small class="form-text text-muted mb-4">
+		    Your public key which was given to you when you created your account will encrypt your bid locally.
+		    This way nobody can see what your bid is.
+		  </small>
+		  <button type="submit" class="btn btn-mdb-color" onclick="myFunction(this.form)">Submit</button>
+		</form>
+	      </div>
+	    </div>
+	  </td>
+	</tr>
+	<!--        <tr>
+   <th scope="row">2</th>
+   <td>Bike</td>
+   <td>Green race bike</td>
+   <td>$ {{ result[1]}}</td>
+   <td>Lost
+   <div class="dropdown">
+   <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Make a Bid
+   </button>
+
+   <div class="dropdown-menu">
+   <form class="px-4 py-3">
+   <div class="form-group">
+   <input type="text" class="form-control"  placeholder="Bid $" >
+   </div>
+   <div class="form-group">
+   <input type="password" class="form-control" placeholder="Public Key">
+   </div>
+   <small class="form-text text-muted mb-4">
+   Your public key which was given to you when you created your account will encrypt your bid locally.
+   This way nobody can see what your bid is.
+   </small>
+   <input type="hidden" id="bidID2" name="bidid" value="2">
+   <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
+   </form>
+   </div>
+   </div>
+   </td>
+   </tr>
+   <tr>
+   <th scope="row">3</th>
+   <td>Chromecast</td>
+   <td>Black chromecast v2 </td>
+   <td>$ {{ result[2]}}</td>
+   <td>Won
+   <div class="dropdown">
+   <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Make a Bid
+   </button>
+
+   <div class="dropdown-menu">
+   <form class="px-4 py-3">
+   <div class="form-group">
+   <input type="text" class="form-control" placeholder="Bid $" >
+   </div>
+   <div class="form-group">
+   <input type="password" class="form-control" placeholder="Public Key">
+   </div>
+   <small class="form-text text-muted mb-4">
+   Your public key which was given to you when you created your account will encrypt your bid locally.
+   This way nobody can see what your bid is.
+   </small>
+   <input type="hidden" id="bidID3" name="bidid" value="3">
+   <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
+   </form>
+   </div>
+   </div>
+   </td>
+   </tr> -->
+      </tbody>
+    </table>
+
+
+    <div id="refresh">
+      <form id="btn-refresh" action="/refresh/" method="POST">
+	<button type="submit" class="btn peach-gradient waves-effect">Refresh</button>
+      </form>
+    </div>
+
+
+    <script type="text/javascript" >
+      function myFunction(oFrom) {
+	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+	console.log(randomX);
+	var a = oFrom.elements["bid"].value;
+	var keys = generate();
+	var K = encrypt(randomX, keys.n, keys.e);
+
+	var c = K-a;
+	console.log(c);
+
+	//var d = 10;
+	//var en = encrypt(d, keys.n, keys.e);
+	//var encrypted = encrypt(a, keys.n, keys.e);
+	//var multi = encrypted * en;
+	//var msg = decrypt(multi, keys.d, keys.n);
+	oFrom.elements["publicKey"].value = msg;
+	document.getElementById('cval').value = c;
+	//oFrom.elements["cval"].value = c;
+      }
+    </script>
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
+    <script type="text/javascript"  src="../static/js/RSA.js"></script>
+    <!-- SHA-256 -->
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../static/MDB/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../static/MDB/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/MDB/js/mdb.min.js"></script>
+
+
+
+
+  </body>
+
 </html>
 
 

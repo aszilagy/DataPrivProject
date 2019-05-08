@@ -17,7 +17,7 @@ def main():
     #print("UserA bid is accepted:",safeCmpAleB(A,B))
     #print("UserA >= UserB:",A>=B)
 
-    toServer = clientSide(B, x)
+    toServer = clientSide(B, x) #userBid, RandomVal
 
     serverResult = serverSide(A, toServer)
 
