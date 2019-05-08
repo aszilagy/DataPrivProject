@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+            <!-- Bootstrap core CSS -->
+            <link href="../static/MDB/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Material Design Bootstrap -->
+            <link href="../static/MDB/css/mdb.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="../static/css/auction.css">
+<script>
+function myFunction(oFrom) {
+    var a = oFrom.elements["bid"].value;
+    debugger;
+    var keys = generate();
+    debugger;
+    var encrypt = encrypt(a, keys.n, keys.e);
+    debugger;
+    var msg = decrypt(encrypt, keys.d, keys.n);
+    debugger;
+
+    document.getElementById("demo").innerHTML = msg;
+    debugger;
+}
+</script>
+</head>
+<body>
+
+    <p id="demo">A Paragraph</p>
+
+    <br>
+    <br>
+
+    <div class="dropdown">
+          <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Make a Bid
+          </button>
+
+          <div class="dropdown-menu">
+            <form class="px-4 py-3" >
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Bid $" name="bid" id="bid" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Public Key" name="publicKey" id="publicKey">
+              </div>
+                <small class="form-text text-muted mb-4">
+                    Your public key which was given to you when you created your account will encrypt your bid locally.
+                    This way nobody can see what your bid is.
+                </small>
+                <input type="hidden" id="bidID1" name="bidid" value="1">
+                <input type="hidden"  name="decr" >
+              <button type="submit" class="btn btn-mdb-color" onclick="myFunction(this.form)">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+
+<!-- SCRIPTS -->
+        <script type="text/javascript"  src="../static/js/RSA.js"></script>
+
+<!-- JQuery -->
+        <script type="text/javascript" src="../static/MDB/js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../static/MDB/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../static/MDB/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../static/MDB/js/mdb.min.js"></script>
+</html>
