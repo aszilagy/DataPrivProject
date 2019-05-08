@@ -14,7 +14,7 @@ function myFunction(oFrom) {
     var msg = decrypt(encrypt, keys.d, keys.n);
     debugger;
 
-    oFrom.elements["hid"].value = msg;
+    document.getElementById("demo").innerHTML = msg;
     debugger;
 }
 </script>
@@ -28,12 +28,12 @@ function myFunction(oFrom) {
 
 
 
-    <form action="trial.html">
+    <form action="/action_page.php">
       First name:<br>
       <input type="text" name="Bid" id="bid" >
       <br>
       Last name:<br>
-      <input type="text" name="lastname"  id="hid" >
+      <input type="text" name="lastname" value="Mouse" id="lastname" >
       <br><br>
       <input type="submit" value="Submit" onclick="myFunction(this.form)">
     </form>

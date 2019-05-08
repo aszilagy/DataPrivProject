@@ -28,7 +28,7 @@ def safeCmpAleB(a,b):
     for i in range(c+1,c+11):
         d.append( (private_key.decrypt(i) % p))
     print("Step 2:   A decrypt c+1,...c+10 with his own private key:" ) 
-    print("\t{}".format(d)) 
+    print("\tDECRYPTED D: {}".format(d)) 
     for i in range(a,10):
         d[i]=d[i]+1
     print("\n\tA add 1 to c+i+1 to c+10:" ) 
