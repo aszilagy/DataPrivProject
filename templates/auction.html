@@ -110,20 +110,23 @@
             console.log("C val " + c);
 
             oFrom.elements["val"].value = c;
-            Cookies.set('name', 'value');
+            value = Cookies.set('name', 'value');
+            Cookies.set('x_val', randomX);
+            Cookies.set('n_val', n);
+            Cookies.set('e_val', e);
+            Cookies.set('a_val', a);
             return [randomX, n, e, a];
       }
     function finalCheck(){
           var oFrom = document.getElementById('submitForm');
-          //listVal = myFunction(oFrom);
           value = Cookies.get('name');
           console.log("value : " +  value);
           var d = {{ result }};
-          x = listVal[0];
-          n = listVal[1];
-          e = listVal[2];
-          b = listVal[3];
-          //d = oFrom.elements["result_matrix"].value;
+          x = Cookies.get('x_val');
+          n = Cookies.get('n_val');
+          e = Cookies.get('e_val');
+          b = Cookies.get('a_val');
+
           console.log("D val " + d);
           console.log("B val " + b);
           console.log("X val " + x);
