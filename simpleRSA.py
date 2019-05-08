@@ -122,6 +122,15 @@ class PrivateKey(namedtuple('PrivateKey', 'n d')):
         """
         return pow(x, self.d, self.n)
 
+def decrypt(x, n, d):
+    """Decrypt the number ``x``.
+
+    The argument ``x`` must be the result of the ``encrypt`` method of
+    the public key.
+    """
+    return pow(x, d)% n
+
+
 
 if __name__ == '__main__':
     # Test with known results.

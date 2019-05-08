@@ -84,68 +84,7 @@
 	    </div>
 	  </td>
 	</tr>
-	<!--        <tr>
-   <th scope="row">2</th>
-   <td>Bike</td>
-   <td>Green race bike</td>
-   <td>$ {{ result[1]}}</td>
-   <td>Lost
-   <div class="dropdown">
-   <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
-   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Make a Bid
-   </button>
 
-   <div class="dropdown-menu">
-   <form class="px-4 py-3">
-   <div class="form-group">
-   <input type="text" class="form-control"  placeholder="Bid $" >
-   </div>
-   <div class="form-group">
-   <input type="password" class="form-control" placeholder="Public Key">
-   </div>
-   <small class="form-text text-muted mb-4">
-   Your public key which was given to you when you created your account will encrypt your bid locally.
-   This way nobody can see what your bid is.
-   </small>
-   <input type="hidden" id="bidID2" name="bidid" value="2">
-   <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
-   </form>
-   </div>
-   </div>
-   </td>
-   </tr>
-   <tr>
-   <th scope="row">3</th>
-   <td>Chromecast</td>
-   <td>Black chromecast v2 </td>
-   <td>$ {{ result[2]}}</td>
-   <td>Won
-   <div class="dropdown">
-   <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
-   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Make a Bid
-   </button>
-
-   <div class="dropdown-menu">
-   <form class="px-4 py-3">
-   <div class="form-group">
-   <input type="text" class="form-control" placeholder="Bid $" >
-   </div>
-   <div class="form-group">
-   <input type="password" class="form-control" placeholder="Public Key">
-   </div>
-   <small class="form-text text-muted mb-4">
-   Your public key which was given to you when you created your account will encrypt your bid locally.
-   This way nobody can see what your bid is.
-   </small>
-   <input type="hidden" id="bidID3" name="bidid" value="3">
-   <button type="submit" class="btn btn-mdb-color" onclick="encryptBid(document.forms[1])">Submit</button>
-   </form>
-   </div>
-   </div>
-   </td>
-   </tr> -->
       </tbody>
     </table>
 
@@ -160,47 +99,51 @@
 
     <script type="text/javascript" >
       function myFunction(oFrom) {
-	var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
-	n = oFrom.elements["publicKey_n"].value;
-	e = oFrom.elements["publicKey_e"].value;
-	console.log(randomX);
-	a = oFrom.elements["bid"].value;
-	K = encrypt(randomX, n, e);
+            var randomX = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+            n = oFrom.elements["publicKey_n"].value;
+            e = oFrom.elements["publicKey_e"].value;
+            console.log(randomX);
+            a = oFrom.elements["bid"].value;
+            K = encrypt(randomX, n, e);
 
-	c = K-a;
-	console.log("C val " + c);
+            c = K-a;
+            console.log("C val " + c);
 
-	oFrom.elements["val"].value = c;
-	return [randomX, n, e, a];
+            oFrom.elements["val"].value = c;
+            Cookies.set('name', 'value');
+            return [randomX, n, e, a];
       }
-function finalCheck(){
-  var oFrom = document.getElementById('submitForm');
-  listVal = myFunction(oFrom);
-  var d = {{ result }};
-  x = listVal[0];
-  n = listVal[1];
-  e = listVal[2];
-  b = listVal[3];
-  //d = oFrom.elements["result_matrix"].value;
-  console.log("D val " + d);
-  console.log("B val " + b);
-  console.log("X val " + x);
-  console.log("d[b] " + d[b] + " " + x%29);
-  console.log("d[b-1] " + d[b-1] + " " + x%29);
+    function finalCheck(){
+          var oFrom = document.getElementById('submitForm');
+          //listVal = myFunction(oFrom);
+          value = Cookies.get('name');
+          console.log("value : " +  value);
+          var d = {{ result }};
+          x = listVal[0];
+          n = listVal[1];
+          e = listVal[2];
+          b = listVal[3];
+          //d = oFrom.elements["result_matrix"].value;
+          console.log("D val " + d);
+          console.log("B val " + b);
+          console.log("X val " + x);
+          console.log("d[b] " + d[b] + " " + x%29);
+          console.log("d[b-1] " + d[b-1] + " " + x%29);
 
-  if(x%29 == (d[b-1]-1)){
-    alert("Winner!");
-  }
-  else{
-    alert("Loser!");
-  }
-}
+          if(x%29 == (d[b-1]-1)){
+            alert("Winner!");
+          }
+          else{
+            alert("Loser!");
+          }
+    }
     </script>
 
 
     <!-- SCRIPTS -->
     <script type="text/javascript"  src="../static/js/BigInteger.js"></script>
     <script type="text/javascript"  src="../static/js/RSA.js"></script>
+    <script type="text/javascript"  src="../static/js/cookie.js"></script>
     <!-- SHA-256 -->
     <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.js"></script>
     <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>

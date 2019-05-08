@@ -5,6 +5,7 @@ import json
 import pickle
 import hashlib
 from create_account import createPass
+from simpleRSA import *
 import yao_test as yao
 
 config = cf.ConfigParser()
@@ -28,17 +29,6 @@ def verify_login():
 
     checkUser, checkPass = False, False
     if 'username' in request.form and 'password' in request.form:
-
-        '''
-        text = "teto"
-        valeur = hashlib.sha256(text.encode('utf-8')).hexdigest()
-        if(valeur == request.form['username']):
-            print('It is checked')
-        else:
-            print('error sha256 is different')
-
-        #print(request.form['username'], '   ::   ', valeur)
-        '''
 
         with open('UserDB.pkl', 'rb') as fr:
             dd = pickle.load(fr)
