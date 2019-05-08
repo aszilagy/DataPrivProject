@@ -45,7 +45,6 @@
 	  <th scope="col">#</th>
 	  <th scope="col">Name</th>
 	  <th scope="col">Description</th>
-	  <th scope="col">Bid</th>
 	  <th scope="col">Status</th>
 	</tr>
       </thead>
@@ -54,7 +53,6 @@
 	  <th scope="row">1</th>
 	  <td>Iphone</td>
 	  <td>Iphone 8 white 128GB</td>
-	  <td>$ {{ result[0]}}</td>
 	  <td>Processing
 	    <div class="dropdown">
 	      <button class="btn btn-elegant btn-sm dropdown-toggle" href="#" role="button"
@@ -104,6 +102,10 @@
             e = oFrom.elements["publicKey_e"].value;
             console.log(randomX);
             a = oFrom.elements["bid"].value;
+	    encrypted_a = encrypt(a, n, e);
+	    oFrom.elements["bid"].value = encrypted_a;
+
+
             K = encrypt(randomX, n, e);
 
             c = K-a;

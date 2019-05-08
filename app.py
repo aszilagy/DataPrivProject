@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session, flash
+import os
 from passlib.hash import sha256_crypt as sha
 import configparser as cf
 import json
@@ -122,12 +123,31 @@ def check():
         pub = keys['KEY_DICT'][0]
         priv = keys['KEY_DICT'][1]
 
-    a = 55
+    if os.path.isfile('WinnerBid.pkl'):
+        with open('WinnerBid.pkl', 'rb') as fb:
+            winner = pickle.load(fb)
+            print(winner)
+            a = priv.decrypt(int(winner['WIN_DICT']))
+            b = priv.decrypt(int(request.form["bid"]))
+            if(b > a):
+                winner = {'WIN_DICT': request.form["bid"]}
+                with open('WinnerBid.pkl', 'wb') as fw:
+                    pickle.dump(winner, fw)
+                
+
+    else:
+        a = priv.decrypt(int(request.form["bid"]))
+        print(a)
+        winner = {'WIN_DICT': request.form["bid"]}
+        with open('WinnerBid.pkl', 'wb') as fw:
+            pickle.dump(winner, fw)
+
+    print("HIGHEST BID",a)
+
     if 'val' in request.form:
         d = yao.serverSide(a, int(request.form["val"]));
-        print("HERE IS X",int(request.form["val"]))
         result = d 
-        print("Giving",result)
+
     return render_template('auction.html', result = result, public_key=[pub.n, pub.e])
 
 @app.route('/refresh/', methods=['GET', 'POST'])
