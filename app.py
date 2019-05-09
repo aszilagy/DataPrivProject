@@ -44,7 +44,7 @@ def verify_login():
                     with open('Keys.pkl', 'rb') as fr:
                         keys = pickle.load(fr)
                         pub = keys['KEY_DICT'][0]
-                        print(pub.n)
+                        #print(pub.n)
                     session['username'] = request.form['username']
                     return render_template('auction.html', username=request.form['username'], result = result, public_key=[pub.n, pub.e])
 

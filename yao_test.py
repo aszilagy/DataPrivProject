@@ -9,10 +9,10 @@ with open('Keys.pkl', 'rb') as fr:
     public_key = keys['KEY_DICT'][0]
     private_key = keys['KEY_DICT'][1]
 
-print(public_key, private_key)
+#print(public_key, private_key)
 
-if len(sys.argv) < 3:
-    print("python yao_test.py <userA_bid> <userB_bid>")
+#if len(sys.argv) < 3:
+#    print("python yao_test.py <userA_bid> <userB_bid>")
 
 
 def main():

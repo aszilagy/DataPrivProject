@@ -38,7 +38,7 @@ def createPass(user, pa):
     with open('UserDB.pkl', 'wb') as fw:
         pickle.dump(userD, fw)
 
-    print(userD)
+    #print(userD)
 
 if __name__ == '__main__':
     main()
